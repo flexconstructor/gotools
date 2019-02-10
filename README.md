@@ -49,6 +49,14 @@ docker run -v $(PWD):/go/src/project_name -w /go/src/project_name flexconstructo
 More [info](https://github.com/go-playground/overalls#usage-and-documentation).
 
 
+### Run GoConvey UI
+
+```
+docker run -v $(PWD):/go/src/project_name -w /go/src/project_name flexconstructor/gotools:latest goconvey -host 0.0.0.0 -port 8080 \
+
+```
+
+
 ## Image versions
 
 

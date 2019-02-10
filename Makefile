@@ -12,8 +12,8 @@
 
 
 IMAGE_NAME := flexconstructor/gotools
-VERSION ?= 0.1.0
-TAGS ?= 0.1.0,0.1,latest
+VERSION ?= 1.11.5-r1
+TAGS ?= 1.11.5-r1,1.11.5,1.11,1,latest
 
 
 comma := ,
@@ -117,22 +117,15 @@ post-push-hook:
 # Usage:
 #	make test [VERSION=<image-version>]
 
-test-container-name ?= kurento-test
+test-container-name ?= goss-test
 
 test:
-	-@docker stop $(test-container-name) \
-	-@docker rm $(test-container-name)
-	docker run -d --rm --name=$(test-container-name) \
-	           -v "$(PWD)/goss.yaml":/goss/goss.yaml \
-	           -e KMS_TURN_URL=test_turn_url \
-	           -e KMS_STUN_IP=test_stun_ip \
-	           -e KMS_STUN_PORT=1234 \
-	           -e KMS_EXTERNAL_IPS=test_external_ips \
-		$(IMAGE_NAME):$(VERSION)
-	sleep 20
-	docker exec $(test-container-name) \
-		/usr/local/bin/goss --gossfile=/goss/goss.yaml validate --format=tap
-	@docker stop $(test-container-name)
+
+	docker run --name $(test-container-name) aelsabbahy/goss goss
+	docker run --rm -it --volumes-from  $(test-container-name) -v $(PWD)/goss.yml:/goss/goss.yml:ro  $(IMAGE_NAME):$(VERSION)  /goss/goss add command 'goimports -v'
+	docker run --rm -it --volumes-from  $(test-container-name) -v $(PWD)/goss.yml:/goss/goss.yml:ro  $(IMAGE_NAME):$(VERSION)  /goss/goss --gossfile=/goss/goss.yml validate --format=tap
+	docker stop $(test-container-name)
+	docker rm $(test-container-name)
 
 
 ################
