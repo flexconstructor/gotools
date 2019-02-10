@@ -34,8 +34,5 @@ command:
   goimports -v:
     exit-status: 0
     stdout: []
-    stderr:
-      - 2019/02/10 15:04:45.484081 fixImports(filename="<standard input>"), abs="/go/<standard
-        input>", srcDir="/go" ...
     timeout: 10000
 
