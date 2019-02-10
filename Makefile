@@ -122,7 +122,6 @@ test-container-name ?= goss-test
 test:
 
 	docker run --name $(test-container-name) aelsabbahy/goss goss
-	docker run --rm -it --volumes-from  $(test-container-name) -v $(PWD)/goss.yml:/goss/goss.yml:ro  $(IMAGE_NAME):$(VERSION)  /goss/goss add command 'goimports -v'
 	docker run --rm -it --volumes-from  $(test-container-name) -v $(PWD)/goss.yml:/goss/goss.yml:ro  $(IMAGE_NAME):$(VERSION)  /goss/goss --gossfile=/goss/goss.yml validate --format=tap
 	docker stop $(test-container-name)
 	docker rm $(test-container-name)
