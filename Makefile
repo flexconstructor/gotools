@@ -164,10 +164,4 @@ ifeq ($(del),yes)
 	git branch -d orig-$(CURRENT_BRANCH)
 endif
 
-
-
-init:
-	 docker run -v $(PWD)/rootfs/go/src/tools:/go/src/tools -w /go/src/tools flexconstructor/gotools:0.1.0 init
-
-
 .PHONY: image tags push release post-push-hook test
