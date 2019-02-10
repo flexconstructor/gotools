@@ -1,0 +1,41 @@
+command:
+  go version:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+      - go version go1.11.5 linux/amd64
+    stderr: []
+    timeout: 10000 # in milliseconds
+  dep version:
+    exit-status: 0
+    stdout:
+      - 'dep:'
+      - 'version     : v0.5.0'
+      - 'build date  : 2018-07-26'
+      - 'git hash    : 224a564'
+      - 'go version  : go1.10.3'
+      - 'go compiler : gc'
+      - 'platform    : linux/amd64'
+      - 'features    : ImportDuringSolve=false'
+    stderr: []
+    timeout: 10000
+  gometalinter  --version:
+    exit-status: 0
+    stdout:
+      - gometalinter version 3.0.0 built from df395bfa67c5d0630d936c0044cf07ff05086655
+        on 2019-01-29T22:44:16Z
+    stderr: []
+    timeout: 10000
+  overalls -help:
+    exit-status: 0
+    stderr: []
+    timeout: 10000
+  goimports -v:
+    exit-status: 0
+    stdout: []
+    stderr:
+      - 2019/02/10 15:04:45.484081 fixImports(filename="<standard input>"), abs="/go/<standard
+        input>", srcDir="/go" ...
+    timeout: 10000
+
